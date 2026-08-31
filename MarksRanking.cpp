@@ -2,21 +2,13 @@
 #include <tuple>
 #include <string>
 #include <cmath>
+#include <vector>
 
-int MarksInputCheck(int a);
-
-struct Student
+int MarksCheck(int& a)
 {
-    std::string name;
-    std::string subject;
-    int marks;
-};
-
-int InputCheck(int a)
-{
-    if(a <= 0 || a >= 100)
+    if(a < 0 || a > 100)
     {
-        std::cout << "Enter valid marks /n";
+        std::cout << "Error : Invalid marks" << std::endl;
         return -1;
     }
     else
@@ -25,34 +17,69 @@ int InputCheck(int a)
     }
 }
 
-std::tuple< std::string , std::string , int > Input()
+void Output(int* a , int* b , int* c)
 {
-    std::cout << "Enter the name of the student \n";
+    if(*a >= 0 && *b >= 0 && *c>= 0)
+    {
+        std::cout << "Maths marks of student is " << *a << std::endl;
+        std::cout << "Physics marks of student is " << *b << std::endl;
+        std::cout << "Chemistry marks of student is " << *c << std::endl;
+    }
+}
+
+std::tuple< std::string  , int , int , int > Input()
+{
+    std::cout << "Enter the name of the student" << std::endl;
     std::string name;
     std::cin >> name ;
     
-    std::cout << "Enter the subject \n";
-    std::string subject;
-    std::cin >> subject ;
-        
-    std::cout << "Enter the marks of the student \n";
-    int marks;
-    std::cin >> marks ;
+    std::cout << "Enter the Maths marks of the student" << std::endl;
+    int Mmarks;
+    std::cin >> Mmarks ;
     
-    Student x;
-    x.name = name;
-    x.subject = subject;
-    x.marks = InputCheck(marks);
-    
-    return { name , subject , marks };
+    std::cout << "Enter the Physics marks of the student" << std::endl;
+    int Pmarks;
+    std::cin >> Pmarks ;
+
+    std::cout << "Enter the Chemistry marks of the student" << std::endl;
+    int Cmarks;
+    std::cin >> Cmarks ;
+
+    return { name , Mmarks , Pmarks , Cmarks };
 }
 
 int main()
 {
-    auto [userName , userSubject , userMarks] = Input();
+    std::vector<int> M_list;
+    std::vector<int> P_list;
+    std::vector<int> C_list;
+    std::vector<std::string> names;
     
-    std::cout << userName << " ," << userSubject << " ," << userMarks << std::endl;
+    char keepGoing = 'y';
     
+    while(keepGoing == 'y' || keepGoing == 'Y')
+    {
+        auto [userName , MathsMarks , PhysicsMarks , ChemistryMarks] = Input();
+        
+        names.push_back(userName);
+        M_list.push_back(MarksCheck(MathsMarks));
+        P_list.push_back(MarksCheck(PhysicsMarks));
+        C_list.push_back(MarksCheck(ChemistryMarks));
+        
+        std::cout << "\nDo you want to enter another student? (y/n): ";
+        std::cin >> keepGoing;
+    }
+    std::cout << "\n--- Final List of Maths Marks ---" << std::endl;
+        for (int i = 0; i < names.size(); i++)
+        {
+            std::cout << "Student " << (i + 1) << " name: " << names[i] << std::endl;
+        }
+        for (int i = 0; i < M_list.size(); i++)
+        {
+            std::cout << "Student " << (i + 1) << " scored: " << M_list[i] << std::endl;
+            std::cout << "Student " << (i + 1) << " scored: " << P_list[i] << std::endl;
+            std::cout << "Student " << (i + 1) << " scored: " << C_list[i] << std::endl;
+        }
     
     std::cin.get();
 }
