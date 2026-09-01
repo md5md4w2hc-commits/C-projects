@@ -37,14 +37,14 @@ void PhysicsTopper(const std::vector<Student> &list)
 {
     std::cout << "Physics - " << '\n';
     std::cout << "NAME : " << list[0].name << '\n';
-    std::cout << "MARKS IN PHYSICS : " << list[0].M_marks << '\n' << '\n';
+    std::cout << "MARKS IN PHYSICS : " << list[0].P_marks << '\n' << '\n';
 }
 
 void ChemistryTopper(const std::vector<Student> &list)
 {
     std::cout << "Chemistry - " << '\n';
     std::cout << "NAME : " << list[0].name << '\n';
-    std::cout << "MARKS IN CHEMISTRY : " << list[0].M_marks << '\n' << '\n';
+    std::cout << "MARKS IN CHEMISTRY : " << list[0].C_marks << '\n' << '\n';
 }
 
 std::tuple< std::string  , int , int , int > Input()
@@ -70,21 +70,21 @@ std::tuple< std::string  , int , int , int > Input()
 
 std::vector<Student> sorting_Maths(std::vector<Student> &list)
 {
-    std::sort(list.begin() , list.end() , [](const Student &a , Student &b){return a.M_marks > b.M_marks;});
+    std::sort(list.begin() , list.end() , [](const Student &a ,const Student &b){return a.M_marks > b.M_marks;});
     
     return list;
 }
 
 std::vector<Student> sorting_Physics(std::vector<Student> &list)
 {
-    std::sort(list.begin() , list.end() , [](const Student &a , Student &b){return a.P_marks > b.P_marks;});
+    std::sort(list.begin() , list.end() , [](const Student &a ,const Student &b){return a.P_marks > b.P_marks;});
     
     return list;
 }
 
 std::vector<Student> sorting_Chemistry(std::vector<Student> &list)
 {
-    std::sort(list.begin() , list.end() , [](const Student &a , Student &b){return a.C_marks > b.C_marks;});
+    std::sort(list.begin() , list.end() , [](const Student &a ,const Student &b){return a.C_marks > b.C_marks;});
     
     return list;
 }
